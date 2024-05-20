@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Copy Text Button</title>
+        <!-- 引入Tailwind CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+    </head>
+    <body class="flex justify-center items-center h-screen">
+
+        <button id="copyButton"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            點擊複製
+        </button>
+
+        <div id="copyText" style="display: none;">haha</div>
+
+        <script>
+    document.getElementById('copyButton').addEventListener('click', function() {
+      var copyText = document.getElementById('copyText');
+      var textArea = document.createElement('textarea');
+      textArea.value = copyText.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('文字已複製：' + copyText.textContent);
+    });
+  </script>
+
+    </body>
+</html>
