@@ -9,25 +9,50 @@
             href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
             rel="stylesheet">
     </head>
-    <body class="flex justify-center items-center h-screen">
-
+    <body class="flex flex-col justify-center items-center h-screen gap-10">
         <button id="copyButton"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             點擊複製
         </button>
+        <pre id="code">
+javascript: void (function (d) { for (var num = 1;
+num < 13; num++) {
+document.getElementsByName("ans"+String(num))[0].checked=true;
+window.scrollTo(0, document.body.scrollHeight ||
+document.documentElement.scrollHeight); }})(document)</pre>
 
-        <div id="copyText" style="display: none;">haha</div>
 
+        <style>
+            pre {
+                background: #f4f4f4;
+                border: 1px solid #ddd;
+                border-left: 3px solid #f36d33;
+                color: #666;
+                page-break-inside: avoid;
+                font-family: monospace;
+                font-size: 15px;
+                line-height: 1.6;
+                margin-bottom: 1.6em;
+                max-width: 100%;
+                overflow: auto;
+                padding: 1em 1.5em;
+                display: block;
+                word-wrap: break-word;
+            }
+        </style>
         <script>
+            function copyToClipboard() {
+                const textToCopy = `javascript: void (function (d) { for (var num = 1; num < 13; num++) { document.getElementsByName("ans"+String(num))[0].checked=true; window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight); }})(document)`;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                  console.log('複製成功！');
+                }).catch(err => {
+                  console.error('複製失敗：', err);
+                });
+              }
+              
+              // 使用範例
     document.getElementById('copyButton').addEventListener('click', function() {
-      var copyText = document.getElementById('copyText');
-      var textArea = document.createElement('textarea');
-      textArea.value = copyText.textContent;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      alert('文字已複製：' + copyText.textContent);
+      copyToClipboard();
     });
   </script>
 
